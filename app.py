@@ -32,7 +32,7 @@ if scat_button: # al hacer clic en el botón
     st.plotly_chart(fig, use_container_width=True)
 
 
-st.caption("\n\n\nSi no deseas utilizar los botones, puedes seleccionar una casilla.")
+st.header("\n\n\nSi no deseas utilizar los botones, puedes seleccionar una casilla.")
 
 show_hist = st.checkbox("Mostrar Histograma")
 show_scat = st.checkbox("Mostrar diagrama de dispersión")
@@ -47,7 +47,7 @@ if show_hist:
     # mostrar un gráfico Plotly interactivo
     st.plotly_chart(fig, use_container_width=True)
 
-if show_scatter:
+if show_scat:
     st.subheader("Diagrama de Dispersión")
     fig = px.scatter(car_data, x="odometer")
 
