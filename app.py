@@ -32,7 +32,7 @@ if scat_button: # al hacer clic en el botón
     st.plotly_chart(fig, use_container_width=True)
 
 
-st.header("\n\n\nSi no deseas utilizar los botones, puedes seleccionar una casilla.")
+st.subheader("\n\n\nSi no deseas utilizar los botones, puedes seleccionar una casilla.", divider="gray")
 
 show_hist = st.checkbox("Mostrar Histograma")
 show_scat = st.checkbox("Mostrar diagrama de dispersión")
@@ -53,7 +53,3 @@ if show_scat:
 
     # mostrar un gráfico Plotly interactivo
     st.plotly_chart(fig, use_container_width=True)
-
-else:
-    st.error("El dataset no contiene columnas numéricas para graficar.")
-
