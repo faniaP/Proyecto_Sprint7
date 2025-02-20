@@ -32,7 +32,7 @@ if scat_button: # al hacer clic en el botón
     st.plotly_chart(fig, use_container_width=True)
 
 
-st.markdown("\n\n\n:blue[***Si no deseas utilizar los botones, puedes seleccionar una casilla.***]", divider="gray")
+st.markdown('''\n\n\n:blue[***Si no deseas utilizar los botones, puedes seleccionar una casilla.***]''', divider="gray")
 
 show_hist = st.checkbox("Mostrar Histograma")
 show_scat = st.checkbox("Mostrar diagrama de dispersión")
