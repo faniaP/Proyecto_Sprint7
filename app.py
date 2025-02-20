@@ -3,7 +3,8 @@ import plotly.express as px
 import streamlit as st
         
 car_data = pd.read_csv('vehicles_us.csv') # leer los datos
-st.write("¡Bienvenido! \n Este sitio es especial. En este sitio encontraras información sobre los anuncios de venta de autos.")
+st.title("¡Bienvenido!") 
+st.caption("\n Este sitio es especial. En este sitio encontraras información sobre los anuncios de venta de autos.")
 st.write("En esta vista encontrarás distintos gráficos sobre los anuncios de autos como: \n * Histogramas\n * Diagramas de dispersión\n\n Elige una opción de diagrama que desees.")
 
 hist_button = st.button('Construir histograma') # crear un botón
@@ -31,7 +32,7 @@ if scat_button: # al hacer clic en el botón
     st.plotly_chart(fig, use_container_width=True)
 
 
-st.write("En caso de que desees crear los diagramas, también tienes la opción de marcar las casillas")
+st.caption("\n\n\nSi no deseas utilizar los botones, puedes seleccionar una casilla.")
 
 show_hist = st.checkbox("Mostrar Histograma")
 show_scat = st.checkbox("Mostrar diagrama de dispersión")
@@ -41,21 +42,18 @@ if show_hist:
     #column = st.selectbox("Selecciona la columna para el histograma", numeric_columns)
 
     # Graficar el histograma
-    fig, ax = plt.subplots()
-    sns.histplot(car_data['odometer'], kde=True, ax=ax)
-    st.pyplot(fig)
+    fig = px.histogram(car_data, x="odometer")
+
+    # mostrar un gráfico Plotly interactivo
+    st.plotly_chart(fig, use_container_width=True)
 
 if show_scatter:
     st.subheader("Diagrama de Dispersión")
-    #x_axis = st.selectbox("Selecciona el eje X", numeric_columns)
-    #y_axis = st.selectbox("Selecciona el eje Y", numeric_columns)
+    fig = px.scatter(car_data, x="odometer")
 
-#if x_axis and y_axis:
-    # Graficar el scatter plot
-    fig, ax = plt.subplots()
-    #sns.scatterplot(data=df, x=x_axis, y=y_axis, ax=ax)
-    sns.scatterplot(car_data['odometer'], ax=ax)
-    st.pyplot(fig)
+    # mostrar un gráfico Plotly interactivo
+    st.plotly_chart(fig, use_container_width=True)
+
 else:
     st.error("El dataset no contiene columnas numéricas para graficar.")
 
