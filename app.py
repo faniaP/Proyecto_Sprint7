@@ -3,7 +3,12 @@ import plotly.express as px
 import streamlit as st
         
 car_data = pd.read_csv('vehicles_us.csv') # leer los datos
+st.write("¡Bienvenido! \n Este sitio es especial. En este sitio encontraras información sobre los anuncios de venta de autos.")
+st.write("En esta vista encontrarás distintos gráficos sobre los anuncios de autos como: \n * Histogramas\n * Diagramas de dispersión\n\n Elige una opción de diagrama que desees.")
+
 hist_button = st.button('Construir histograma') # crear un botón
+scat_button = st.button('Construir diagrama de dispersión') # crear un botón
+
 
 if hist_button: # al hacer clic en el botón
     # escribir un mensaje
@@ -15,7 +20,42 @@ if hist_button: # al hacer clic en el botón
     # mostrar un gráfico Plotly interactivo
     st.plotly_chart(fig, use_container_width=True)
     
-build_histogram = st.checkbox('Construir un histograma')
+if scat_button: # al hacer clic en el botón
+    # escribir un mensaje
+    st.write('Creación de un diagrama de dispersión para el conjunto de datos de anuncios de venta de coches')
+    
+    # crear una gráfica de dispersion
+    fig = px.scatter(car_data, x="odometer")
 
-if build_histogram: # si la casilla de verificación está seleccionada
-    st.write('Construir un histograma para la columna odómetro')
+    # mostrar un gráfico Plotly interactivo
+    st.plotly_chart(fig, use_container_width=True)
+
+
+st.write("En caso de que desees crear los diagramas, también tienes la opción de marcar las casillas")
+
+show_hist = st.checkbox("Mostrar Histograma")
+show_scat = st.checkbox("Mostrar diagrama de dispersión")
+ 
+if show_hist:
+    st.subheader("Histograma")
+    #column = st.selectbox("Selecciona la columna para el histograma", numeric_columns)
+
+    # Graficar el histograma
+    fig, ax = plt.subplots()
+    sns.histplot(car_data['odometer'], kde=True, ax=ax)
+    st.pyplot(fig)
+
+if show_scatter:
+    st.subheader("Diagrama de Dispersión")
+    #x_axis = st.selectbox("Selecciona el eje X", numeric_columns)
+    #y_axis = st.selectbox("Selecciona el eje Y", numeric_columns)
+
+#if x_axis and y_axis:
+    # Graficar el scatter plot
+    fig, ax = plt.subplots()
+    #sns.scatterplot(data=df, x=x_axis, y=y_axis, ax=ax)
+    sns.scatterplot(car_data['odometer'], ax=ax)
+    st.pyplot(fig)
+else:
+    st.error("El dataset no contiene columnas numéricas para graficar.")
+
